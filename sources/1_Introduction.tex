@@ -1,0 +1,11 @@
+
+\singlespacing                        % 设置单倍行距
+
+
+Deploying neural networks on embedded devices is a central challenge in TinyML, where hardware platforms typically provide only limited on-chip memory. During inference, each layer produces intermediate results called activation tensors, which must remain stored in memory until they are consumed by subsequent operations. In the deployment pipeline, neural network execution can be represented as a data flow graph (DFG), where nodes correspond to operators and edges correspond to activation tensors.
+
+Because embedded devices have very limited SRAM, efficiently managing these intermediate tensors is critical. Many tensors are not simultaneously active during execution, meaning that memory regions can be reused when their lifetimes do not overlap. Static memory planning therefore aims to assign tensors to memory locations while minimizing the peak memory usage required during inference. This task can be viewed as a combinatorial optimization problem defined by tensor sizes and lifetime intervals.
+
+In this report, we investigate optimization methods for static memory planning. First we establish several foundational storage methods, including Ping-pong allocation, Greedy-by-size buffer sharing, and Hole-aware Greedy placement, in order to compare discrete-buffer and offset-based memory allocation strategies. Based on the observations obtained from these baseline methods, we then apply Local Search, Simulated Annealing, and Genetic Algorithms to further optimize the allocation process.
+
+Rather than evaluating the methods only in terms of final peak memory, we analyze the trade-off between memory reduction and computational effort across different neural network execution patterns. This allows the report to identify not only which methods achieve low memory footprints, but also which strategies provide the most practical balance between optimization quality and runtime cost for TinyML deployment.
